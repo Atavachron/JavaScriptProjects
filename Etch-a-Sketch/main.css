@@ -6,6 +6,17 @@ body {
   background: white;
   background: url("http://picsum.photos/1200");
   background-size: cover;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.shake {
+  background-color: brown;
+  color: white;
+}
+
+button {
+  font-family: inherit;
 }
 
 canvas {

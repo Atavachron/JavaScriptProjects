@@ -26,7 +26,7 @@ ctx.stroke();
 //Draw Function
 //takes an options object as an argument
 function draw({ key }) {
-  hue = hue + 1;
+  hue = hue + 10;
   ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   console.log(key);
   ctx.beginPath();
@@ -61,5 +61,16 @@ function handleKey(e) {
   }
 }
 
+//Clear and shake functions
+
+function clearCanvas() {
+  canvas.classList.add("shake");
+  ctx.clearRect(0, 0, width, height);
+  canvas.addEventListener("animationend", function() {
+    canvas.classList.remove("shake");
+  });
+}
+
 //Key listeners
 window.addEventListener("keydown", handleKey);
+shakebutton.addEventListener("click", clearCanvas);
