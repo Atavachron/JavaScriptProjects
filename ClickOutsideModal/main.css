@@ -53,6 +53,10 @@ button {
   pointer-events: all;
 }
 
+.modal-outer img {
+  width: 100%;
+}
+
 .modal-inner {
   max-width: 600px;
   min-width: 400px;
@@ -60,4 +64,10 @@ button {
   padding: 2rem;
   border-radius: 5px;
   background: white;
+  transform: translateY(-200%);
+  transition: transform 2s;
+}
+
+.modal-outer.open .modal-inner {
+  transform: translateY(0);
 }
