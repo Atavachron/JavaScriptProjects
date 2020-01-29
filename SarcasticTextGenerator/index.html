@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sarcastic Text Generator</title>
+    <link rel="stylesheet" href="./main.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="box">
+      <label for="sarcastic">
+        <input
+          type="radio"
+          value="sarcastic"
+          id="sarcastic"
+          name="filter"
+          checked
+        />
+        Sarcastic
+      </label>
+      <label for="funky">
+        <input type="radio" value="funky" id="funky" name="filter" />
+        Funky
+      </label>
+      <label for="unable">
+        <input type="radio" value="unable" id="unable" name="filter" />
+        Unable to structure a sentence
+      </label>
+      <textarea name="text">I am trying to be sarcastic here.</textarea>
+      <p class="result"></p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+:root {
+  --font: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  font-family: var(--font);
+}
+
+.box {
+  margin: 0 auto;
+  background: lightyellow;
+  width: 600px;
+  padding: 2rem;
+  border-radius: 10px;
+  display: grid;
+  border: 2px solid green;
+}
+
+textarea {
+  padding: 0.5rem;
+  margin: 1rem auto;
+  width: 90%;
+  font-family: var(--font);
+  font-size: 1rem;
+  border-radius: 5px;
+}
