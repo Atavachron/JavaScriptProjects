@@ -41,7 +41,6 @@ body {
   justify-items: center;
 }
 
-/* Shopping Form */
 .shopping {
   display: grid;
   grid-template-columns: 1fr auto;

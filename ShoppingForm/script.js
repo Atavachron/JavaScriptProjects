@@ -3,6 +3,8 @@ const list = document.querySelector(".list");
 
 let items = [];
 
+//Functions
+
 function handleSubmit(e) {
   e.preventDefault();
   const name = e.currentTarget.item.value;
@@ -60,10 +62,11 @@ function markAsComplete(id) {
   list.dispatchEvent(new CustomEvent("itemsUpdated"));
 }
 
+//Event Listeners
+
 shoppingForm.addEventListener("submit", handleSubmit);
 list.addEventListener("itemsUpdated", displayItems);
 list.addEventListener("itemsUpdated", mirrorToLocalStorage);
-
 list.addEventListener("click", event => {
   const id = parseInt(event.target.value);
   if (event.target.matches("button")) {
