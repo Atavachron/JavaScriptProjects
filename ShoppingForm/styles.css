@@ -1,3 +1,39 @@
+html {
+  --blue: #0072b9;
+  --black: #2e2e2e;
+  --text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+  --box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  background-color: var(--black);
+}
+
+button,
+input[type="button"] {
+  color: white;
+  background: var(--blue);
+  padding: 1rem;
+  border: 0;
+  border: 2px solid transparent;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  display: block;
+  padding: 1rem;
+  border: 1px solid var(--black);
+}
+
 body {
   min-height: 100vh;
   display: grid;
