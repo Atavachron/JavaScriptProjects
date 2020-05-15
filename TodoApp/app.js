@@ -4,7 +4,16 @@ const todoList = {
   todos: [],
 
   displayTodos() {
-    console.log('My todos: ', this.todos);
+    if (this.todos.length) {
+      console.log('My todos:');
+      for (let i = 0; i < this.todos.length; i++) {
+        this.todos[i].isCompleted
+          ? console.log(`(X) ${this.todos[i].todoText}`)
+          : console.log(`( ) ${this.todos[i].todoText}`);
+      }
+    } else {
+      console.log('Your list is empty.');
+    }
   },
 
   addTodo(todoText) {
