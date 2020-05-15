@@ -6,11 +6,11 @@ const todoList = {
   displayTodos() {
     if (this.todos.length) {
       console.log('My todos:');
-      for (let i = 0; i < this.todos.length; i++) {
-        this.todos[i].isCompleted
-          ? console.log(`(X) ${this.todos[i].todoText}`)
-          : console.log(`( ) ${this.todos[i].todoText}`);
-      }
+      this.todos.forEach((todo) => {
+        todo.isCompleted
+          ? console.log(`(X) ${todo.todoText}`)
+          : console.log(`( ) ${todo.todoText}`);
+      });
     } else {
       console.log('Your list is empty.');
     }
