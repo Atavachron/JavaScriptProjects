@@ -61,4 +61,13 @@ const todoList = {
       ];
     }
   },
+
+  toggleAll() {
+    if (this.todos.every((todo) => todo.isCompleted)) {
+      this.todos = this.todos.map((todo) => ({ ...todo, isCompleted: false }));
+    } else {
+      this.todos = this.todos.map((todo) => ({ ...todo, isCompleted: true }));
+    }
+    this.displayTodos();
+  },
 };
