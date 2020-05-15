@@ -1,5 +1,8 @@
 'use strict';
 
+const $displayButton = document.getElementById('display-btn');
+const $toggleButton = document.getElementById('toggle-btn');
+
 const todoList = {
   todos: [],
 
@@ -71,3 +74,11 @@ const todoList = {
     this.displayTodos();
   },
 };
+
+$displayButton.addEventListener('click', () => {
+  todoList.displayTodos();
+});
+
+$toggleButton.addEventListener('click', () => {
+  todoList.toggleAll();
+});
