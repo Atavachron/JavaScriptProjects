@@ -1,6 +1,5 @@
 'use strict';
 
-const $displayButton = document.getElementById('display-btn');
 const $toggleButton = document.getElementById('toggle-btn');
 const $addButton = document.getElementById('add-todo');
 const $todoInput = document.getElementById('todo-input');
@@ -11,27 +10,12 @@ const $deleteButton = document.getElementById('delete-todo');
 const $deleteIndex = document.getElementById('delete-todo-index');
 const $toggleOneButton = document.getElementById('toggle-todo');
 const $toggleOneIndex = document.getElementById('toggle-todo-index');
-const $output = document.getElementById('output');
 
 const todoList = {
   todos: [],
 
-  displayTodos() {
-    if (this.todos.length) {
-      console.log('My todos:');
-      this.todos.forEach((todo) => {
-        todo.isCompleted
-          ? console.log(`(X) ${todo.todoText}`)
-          : console.log(`( ) ${todo.todoText}`);
-      });
-    } else {
-      console.log('Your list is empty.');
-    }
-  },
-
   addTodo(todoText) {
     this.todos = [...this.todos, { todoText, isCompleted: false }];
-    this.displayTodos();
   },
 
   changeTodo(index, todoText) {
@@ -40,12 +24,10 @@ const todoList = {
     todo = { ...todo, todoText };
 
     this.updateTodoArray(index, todo);
-    this.displayTodos();
   },
 
   deleteTodo(index) {
     this.updateTodoArray(index);
-    this.displayTodos();
   },
 
   toggleCompleted(index) {
@@ -57,7 +39,6 @@ const todoList = {
     };
 
     this.updateTodoArray(index, todo);
-    this.displayTodos();
   },
 
   updateTodoArray(index, todo) {
@@ -81,18 +62,27 @@ const todoList = {
     } else {
       this.todos = this.todos.map((todo) => ({ ...todo, isCompleted: true }));
     }
-    this.displayTodos();
+  },
+};
+
+const view = {
+  displayTodos() {
+    let $output = document.getElementById('output');
+    $output.innerHTML = todoList.todos
+      .map((todo) =>
+        todo.isCompleted
+          ? `<li>(x) ${todo.todoText}</li>`
+          : `<li>( ) ${todo.todoText}</li>`
+      )
+      .join('');
   },
 };
 
 //Event Handlers
 
-$displayButton.addEventListener('click', () => {
-  todoList.displayTodos();
-});
-
 $toggleButton.addEventListener('click', () => {
   todoList.toggleAll();
+  view.displayTodos();
 });
 
 $addButton.addEventListener('click', (e) => {
@@ -101,6 +91,7 @@ $addButton.addEventListener('click', (e) => {
     todoList.addTodo($todoInput.value);
     $todoInput.value = '';
   }
+  view.displayTodos();
 });
 
 $changeButton.addEventListener('click', (e) => {
@@ -108,16 +99,19 @@ $changeButton.addEventListener('click', (e) => {
   todoList.changeTodo($changeIndex.valueAsNumber, $changeInput.value);
   $changeIndex.value = '';
   $changeInput.value = '';
+  view.displayTodos();
 });
 
 $deleteButton.addEventListener('click', (e) => {
   e.preventDefault();
   todoList.deleteTodo($deleteIndex.valueAsNumber);
   $deleteIndex.value = '';
+  view.displayTodos();
 });
 
 $toggleOneButton.addEventListener('click', (e) => {
   e.preventDefault();
   todoList.toggleCompleted($toggleOneIndex.valueAsNumber);
   $toggleOneIndex.value = '';
+  view.displayTodos();
 });
