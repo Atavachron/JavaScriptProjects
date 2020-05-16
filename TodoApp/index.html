@@ -8,6 +8,28 @@
   <body>
     <button id="display-btn">Display Todos</button>
     <button id="toggle-btn">Toggle All</button>
+    <form>
+      <div>
+        <input id="add-todo" type="submit" value="Add" />
+        <input id="todo-input" type="text" autocomplete="off" />
+      </div>
+    </form>
+    <form>
+      <div>
+        <input id="change-todo" type="submit" value="Change" />
+        <input type="number" id="change-todo-index" autocomplete="off" />
+        <input type="text" id="change-todo-input" autocomplete="off" />
+      </div>
+    </form>
+    <form>
+      <input type="submit" id="delete-todo" value="Delete" />
+      <input type="number" id="delete-todo-index" autocomplete="off" />
+    </form>
+    <form>
+      <input type="submit" id="toggle-todo" value="Toggle" />
+      <input type="number" id="toggle-todo-index" autocomplete="off" />
+    </form>
+    <div id="output"></div>
     <script src="app.js"></script>
   </body>
 </html>

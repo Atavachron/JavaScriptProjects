@@ -2,6 +2,16 @@
 
 const $displayButton = document.getElementById('display-btn');
 const $toggleButton = document.getElementById('toggle-btn');
+const $addButton = document.getElementById('add-todo');
+const $todoInput = document.getElementById('todo-input');
+const $changeButton = document.getElementById('change-todo');
+const $changeIndex = document.getElementById('change-todo-index');
+const $changeInput = document.getElementById('change-todo-input');
+const $deleteButton = document.getElementById('delete-todo');
+const $deleteIndex = document.getElementById('delete-todo-index');
+const $toggleOneButton = document.getElementById('toggle-todo');
+const $toggleOneIndex = document.getElementById('toggle-todo-index');
+const $output = document.getElementById('output');
 
 const todoList = {
   todos: [],
@@ -75,10 +85,39 @@ const todoList = {
   },
 };
 
+//Event Handlers
+
 $displayButton.addEventListener('click', () => {
   todoList.displayTodos();
 });
 
 $toggleButton.addEventListener('click', () => {
   todoList.toggleAll();
+});
+
+$addButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  if ($todoInput.value) {
+    todoList.addTodo($todoInput.value);
+    $todoInput.value = '';
+  }
+});
+
+$changeButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  todoList.changeTodo($changeIndex.valueAsNumber, $changeInput.value);
+  $changeIndex.value = '';
+  $changeInput.value = '';
+});
+
+$deleteButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  todoList.deleteTodo($deleteIndex.valueAsNumber);
+  $deleteIndex.value = '';
+});
+
+$toggleOneButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  todoList.toggleCompleted($toggleOneIndex.valueAsNumber);
+  $toggleOneIndex.value = '';
 });
