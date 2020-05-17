@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+  </head>
+  <body>
+    <form id="add-form">
+      <input
+        id="todo-input"
+        type="text"
+        autocomplete="off"
+        placeholder="Todo"
+      />
+      <input id="add-btn" type="submit" value="Add Todo" />
+    </form>
+
+    <form id="change-form">
+      <input
+        id="change-index-input"
+        type="number"
+        autocomplete="off"
+        placeholder="Todo index"
+      />
+      <input
+        id="change-text-input"
+        type="text"
+        autocomplete="off"
+        placeholder="New Text"
+      />
+      <input id="change-btn" type="submit" value="Change Todo" />
+    </form>
+    <form id="toggle-all"><input type="submit" value="Toggle All" /></form>
+    <div>
+      <ul id="output"></ul>
+    </div>
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
