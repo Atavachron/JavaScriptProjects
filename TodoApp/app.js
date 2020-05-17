@@ -6,10 +6,9 @@ const $todoInput = document.getElementById('todo-input');
 const $changeButton = document.getElementById('change-todo');
 const $changeIndex = document.getElementById('change-todo-index');
 const $changeInput = document.getElementById('change-todo-input');
-const $deleteButton = document.getElementById('delete-todo');
-const $deleteIndex = document.getElementById('delete-todo-index');
 const $toggleOneButton = document.getElementById('toggle-todo');
 const $toggleOneIndex = document.getElementById('toggle-todo-index');
+const $todosUl = document.getElementById('output');
 
 const todoList = {
   todos: [],
@@ -69,10 +68,11 @@ const view = {
   displayTodos() {
     let $output = document.getElementById('output');
     $output.innerHTML = todoList.todos
-      .map((todo) =>
-        todo.isCompleted
-          ? `<li>(x) ${todo.todoText}</li>`
-          : `<li>( ) ${todo.todoText}</li>`
+      .map(
+        (todo, index) =>
+          `<li id="${index}">${todo.isCompleted ? '(x)' : '( )'} ${
+            todo.todoText
+          }<button class="delete-button">Delete</button></li>`
       )
       .join('');
   },
@@ -102,16 +102,16 @@ $changeButton.addEventListener('click', (e) => {
   view.displayTodos();
 });
 
-$deleteButton.addEventListener('click', (e) => {
-  e.preventDefault();
-  todoList.deleteTodo($deleteIndex.valueAsNumber);
-  $deleteIndex.value = '';
-  view.displayTodos();
-});
-
 $toggleOneButton.addEventListener('click', (e) => {
   e.preventDefault();
   todoList.toggleCompleted($toggleOneIndex.valueAsNumber);
   $toggleOneIndex.value = '';
   view.displayTodos();
+});
+
+$todosUl.addEventListener('click', (e) => {
+  if (e.target.className === 'delete-button') {
+    todoList.deleteTodo(Number(e.target.parentElement.id));
+    view.displayTodos();
+  }
 });
