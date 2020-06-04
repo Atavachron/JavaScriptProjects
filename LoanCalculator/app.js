@@ -11,11 +11,18 @@ const $totalPayment = get('#total-payment');
 const $totalInterest = get('#total-interest');
 
 const $loading = get('#loading');
-const $results = get('#results');
+const $results = get('.results');
 
 //Event Listeners
 
-$loanForm.addEventListener('submit', calculateResults);
+$loanForm.addEventListener('submit', (e) => {
+  $results.style.display = 'none';
+  $loading.style.display = 'block';
+
+  setTimeout(calculateResults, 1000);
+
+  e.preventDefault();
+});
 
 function calculateResults(e) {
   const principal = parseFloat($amount.value);
@@ -31,10 +38,14 @@ function calculateResults(e) {
     $monthlyPayment.value = monthly.toFixed(2);
     $totalPayment.value = (monthly * calculatedPayments).toFixed(2);
     $totalInterest.value = (monthly * calculatedPayments - principal).toFixed();
+
+    $results.style.display = 'block';
+    $loading.style.display = 'none';
   } else {
     displayError('Please check the numbers you have entered');
+    $results.style.display = 'none';
+    $loading.style.display = 'none';
   }
-  e.preventDefault();
 }
 
 function displayError(err) {
