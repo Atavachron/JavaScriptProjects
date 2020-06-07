@@ -57,6 +57,46 @@ class UI {
 //Instantiate a UI object
 const ui = new UI();
 
+//Create a local storage class
+class Store {
+  static getBooks() {
+    let books;
+    if (!localStorage.getItem('books')) {
+      books = [];
+    } else {
+      books = JSON.parse(localStorage.getItem('books'));
+    }
+    return books;
+  }
+
+  static displayBooks() {
+    const books = Store.getBooks();
+    books.forEach((book) => ui.addBookToList(book));
+  }
+
+  static addBook(book) {
+    const books = Store.getBooks();
+
+    books.push(book);
+
+    localStorage.setItem('books', JSON.stringify(books));
+  }
+
+  static removeBook(isbn) {
+    const books = Store.getBooks();
+
+    books.forEach((book, index) => {
+      if ((book.isbn = isbn)) {
+        books.splice(index, 1);
+      }
+    });
+
+    localStorage.setItem('books', JSON.stringify(books));
+  }
+}
+
+document.addEventListener('DOMContentLoaded', Store.displayBooks);
+
 document.querySelector('#book-form').addEventListener('submit', (e) => {
   //Get the input values
   const title = document.querySelector('#title').value;
@@ -71,6 +111,7 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     ui.showAlert('Please make sure all fields are filled', 'error');
   } else {
     ui.addBookToList(book);
+    Store.addBook(book);
     ui.clearInputFields();
     ui.showAlert('Book added', 'success');
   }
@@ -81,6 +122,8 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 document.querySelector('#book-list').addEventListener('click', (e) => {
   if (e.target.classList.contains('delete')) {
     ui.deleteBook(e.target);
+    //Remove the book from ls using the ISBN number
+    Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
     ui.showAlert('Book deleted', 'success');
   }
   e.preventDefault();
