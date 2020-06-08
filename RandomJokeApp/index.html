@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Joke</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Chick Norris Jokes Generator</h1>
+      <form id="jokes-form">
+        <div>
+          <label for="number">Number of Jokes</label>
+          <input type="number" id="number" />
+        </div>
+        <div>
+          <input
+            class="button-primary"
+            type="submit"
+            id="get-jokes"
+            value="Get Jokes"
+          />
+        </div>
+      </form>
+      <ul class="output"></ul>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
