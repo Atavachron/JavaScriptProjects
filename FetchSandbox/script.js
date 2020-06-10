@@ -1,6 +1,7 @@
 //Fetching data from a local text file
 document.getElementById('fetchText').addEventListener('click', function () {
   fetch('text.txt')
+    .then(handleErrors)
     .then(function (res) {
       return res.text();
     })
@@ -15,6 +16,7 @@ document.getElementById('fetchText').addEventListener('click', function () {
 //Fetching data from local JSON file
 document.getElementById('fetchJSON').addEventListener('click', function () {
   fetch('json.JSON')
+    .then(handleErrors)
     .then(function (res) {
       return res.json();
     })
@@ -33,6 +35,7 @@ document.getElementById('fetchJSON').addEventListener('click', function () {
 //Fetching the emails of all users from https://reqres.in/api/users
 document.getElementById('fetchRemote').addEventListener('click', function () {
   fetch('https://reqres.in/api/users')
+    .then(handleErrors)
     .then(function (res) {
       return res.json();
     })
@@ -47,3 +50,10 @@ document.getElementById('fetchRemote').addEventListener('click', function () {
       console.log(err);
     });
 });
+
+function handleErrors(res) {
+  if (!res.ok) {
+    throw new Error(res.error);
+  }
+  return res;
+}
