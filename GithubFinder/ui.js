@@ -30,4 +30,26 @@ class UI {
       <div id="repos">lorem ispus</div>
     `;
   }
+
+  showAlert(message, className) {
+    this.clearAlert();
+    const div = document.createElement('div');
+    div.className = className;
+    div.appendChild(document.createTextNode(message));
+    const container = document.querySelector('.searchContainer');
+    container.insertAdjacentElement('afterbegin', div);
+
+    setTimeout(() => this.clearAlert(), 3000);
+  }
+
+  clearAlert() {
+    const existingAlert = document.querySelector('.alert');
+    if (existingAlert) {
+      existingAlert.remove();
+    }
+  }
+
+  clearProfile() {
+    this.profile.innerHTML = '';
+  }
 }
