@@ -1,4 +1,7 @@
-const weather = new Weather('Dubai', 'AE');
+const storage = new Storage();
+const weatherLocation = storage.getLocationData();
+
+const weather = new Weather(weatherLocation.city, weatherLocation.country);
 const ui = new UI();
 
 //Load the weather automatically when the page is loaded
@@ -9,7 +12,13 @@ document.getElementById('change-btn').addEventListener('click', e => {
   const city = document.getElementById('city').value;
   const country = document.getElementById('country').value;
 
+  //Change location
   weather.changeLocation(city, country);
+
+  //Set location in Local Storage
+  storage.setLocationData(city, country);
+
+  //Get and display the weather
   getWeather();
 
   //Use JQuery to hide modal
