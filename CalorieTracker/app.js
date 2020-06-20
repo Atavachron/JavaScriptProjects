@@ -28,6 +28,25 @@ const ItemCtrl = (function () {
     logData() {
       return data;
     },
+    addItem(name, calories) {
+      //Create ID
+      let ID;
+      if (data.items.length > 0) {
+        //Create ID by adding one to the id of the last element of the array
+        ID = data.items[data.items.length - 1].id + 1;
+      } else {
+        ID = 0;
+      }
+
+      //Convert calories to number
+      calories = parseInt(calories);
+
+      //Create New Item
+      const newItem = new Item(ID, name, calories);
+
+      data.items.push(newItem);
+      return newItem;
+    },
   };
 })();
 
@@ -36,6 +55,9 @@ const ItemCtrl = (function () {
 const UICtrl = (function () {
   const UISelectors = {
     itemList: '#item-list',
+    addBtn: '.add-btn',
+    itemNameInput: '#item-name',
+    itemCaloriesInput: '#item-calories',
   };
 
   //Public Methods
@@ -53,12 +75,45 @@ const UICtrl = (function () {
       });
       document.querySelector(UISelectors.itemList).innerHTML = output;
     },
+
+    getSelectors() {
+      return UISelectors;
+    },
+
+    getItemInput() {
+      //Return the input as an object
+      return {
+        name: document.querySelector(UISelectors.itemNameInput).value,
+        calories: document.querySelector(UISelectors.itemCaloriesInput).value,
+      };
+    },
   };
 })();
 
 //App Controller
 
 const App = (function (ItemCtrl, UICtrl) {
+  //Load event Listeners
+  const loadEventListeners = function () {
+    //Get UI Selectors
+    const UISelectors = UICtrl.getSelectors();
+
+    document
+      .querySelector(UISelectors.addBtn)
+      .addEventListener('click', itemAddSubmit);
+  };
+
+  const itemAddSubmit = function (e) {
+    const input = UICtrl.getItemInput();
+
+    //Check the inputs
+    if (input.name !== '' && input.calories !== '') {
+      const newItem = ItemCtrl.addItem(input.name, input.calories);
+    }
+
+    e.preventDefault();
+  };
+
   //Public methods
   return {
     init() {
@@ -67,6 +122,8 @@ const App = (function (ItemCtrl, UICtrl) {
 
       //Populate the list with items
       UICtrl.populateItemList(items);
+
+      loadEventListeners();
     },
   };
 })(ItemCtrl, UICtrl);
