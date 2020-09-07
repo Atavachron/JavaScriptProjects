@@ -17,22 +17,33 @@ document
 
 //Create a function to move to the previous slide
 function moveToPrevSlide() {
+  //Remove the visible class from the current slide
   slides[slidePosition].classList.remove('carousel-item-visible');
+
+  //Check if the slide is the last one
   if (slidePosition === totalSlides - 1) {
+    //Reset the slidePosition
     slidePosition = 0;
   } else {
+    //Increment slidePosition
     slidePosition++;
   }
+  //Add the visible class to the new slide
   slides[slidePosition].classList.add('carousel-item-visible');
 }
 
 //Create a function to move to the next slide
 function moveToNextSlide() {
+  //Remove the visible class from the current slide
   slides[slidePosition].classList.remove('carousel-item-visible');
+  //Check if the slide is the first one
   if (slidePosition === 0) {
+    //Reset the slide position to the last slide
     slidePosition = totalSlides - 1;
   } else {
+    //Decrement slidePosition
     slidePosition--;
   }
+  //Add the visible class to the new slide
   slides[slidePosition].classList.add('carousel-item-visible');
 }
