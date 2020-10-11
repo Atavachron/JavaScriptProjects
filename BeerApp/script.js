@@ -13,7 +13,27 @@ async function getBeers() {
     let beerHtml = '';
 
     data.forEach(beer => {
-      beerHtml += `<h3>${beer.name}</h3>`;
+      beerHtml += `
+      <div class="beer-wrapper card">
+        <div class="beer">
+          <img class="beer-img" src="${beer.image_url}">
+          <h3>${beer.name}</h3>
+          <span class="beer-info">
+            <span>ABV: ${beer.abv}</span>
+            <span>IBU: ${beer.ibu}</span>
+          </span>
+        </div>
+        <div class='beer-content'>
+          <div class='beer-name'>${beer.name}</div>
+          <div class='beer-tagline'>${beer.tagline}</div>
+          <div class='beer-description'>${beer.description}</div>
+          <div class='beer-food-pairing'>
+            Pair with: ${beer.food_pairing.join(', ')}
+          </div>
+        </div>
+      </div>
+    `;
+      console.log(beer);
     });
 
     //Set the inner html of the beers div to the variable holding the beer names
