@@ -2,11 +2,35 @@
 
 const urlBase = 'https://api.punkapi.com/v2/beers';
 const beersElem = document.querySelector('.beers');
+const filterABV = document.getElementById('filterABV');
+let optionsABV = '';
+
+filterABV.addEventListener('change', e => {
+  const value = e.target.value;
+
+  switch (value) {
+    case 'all':
+      optionsABV = '';
+      break;
+    case 'weak':
+      optionsABV = 'abv_lt=4.6';
+      break;
+    case 'medium':
+      optionsABV = 'abv_gt=4.5&abv_lt=7.6';
+      break;
+    case 'strong':
+      optionsABV = 'abv_gt=7.5';
+      break;
+  }
+
+  getBeers();
+});
 
 async function getBeers() {
   try {
+    const url = urlBase + '?' + optionsABV;
     //Fetch the data from the API
-    const res = await fetch(urlBase);
+    const res = await fetch(url);
     const data = await res.json();
 
     //Create an empty variable that will hold the beer names
