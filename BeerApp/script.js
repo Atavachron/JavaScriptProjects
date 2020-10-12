@@ -5,6 +5,30 @@ const beersElem = document.querySelector('.beers');
 const filterABV = document.getElementById('filterABV');
 let optionsABV = '';
 
+const filterIBU = document.getElementById('filterIBU');
+let optionsIBU = '';
+
+filterIBU.addEventListener('change', e => {
+  const value = e.target.value;
+
+  switch (value) {
+    case 'all':
+      optionsIBU = '';
+      break;
+    case 'weak':
+      optionsIBU = 'ibu_lt=35';
+      break;
+    case 'medium':
+      optionsIBU = 'ibu_gt=34&ibu_lt=75';
+      break;
+    case 'strong':
+      optionsIBU = 'ibu_gt=74';
+      break;
+  }
+
+  getBeers();
+});
+
 filterABV.addEventListener('change', e => {
   const value = e.target.value;
 
@@ -28,7 +52,7 @@ filterABV.addEventListener('change', e => {
 
 async function getBeers() {
   try {
-    const url = urlBase + '?' + optionsABV;
+    const url = urlBase + '?' + optionsABV + '&' + optionsIBU;
     //Fetch the data from the API
     const res = await fetch(url);
     const data = await res.json();
