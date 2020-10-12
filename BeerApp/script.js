@@ -1,12 +1,15 @@
 //Using the PUNK API to get beer data
 
-const urlBase = 'https://api.punkapi.com/v2/beers';
+const urlBase = 'https://api.punkapi.com/v2/beers?page=';
 const beersElem = document.querySelector('.beers');
+const pageText = document.getElementById('pageNumber');
+const prevPage = document.getElementById('prevPage');
+const nextPage = document.getElementById('nextPage');
 const filterABV = document.getElementById('filterABV');
 let optionsABV = '';
-
 const filterIBU = document.getElementById('filterIBU');
 let optionsIBU = '';
+let page = 1;
 
 filterIBU.addEventListener('change', e => {
   const value = e.target.value;
@@ -16,16 +19,17 @@ filterIBU.addEventListener('change', e => {
       optionsIBU = '';
       break;
     case 'weak':
-      optionsIBU = 'ibu_lt=35';
+      optionsIBU = '&ibu_lt=35';
       break;
     case 'medium':
-      optionsIBU = 'ibu_gt=34&ibu_lt=75';
+      optionsIBU = '&ibu_gt=34&ibu_lt=75';
       break;
     case 'strong':
-      optionsIBU = 'ibu_gt=74';
+      optionsIBU = '&ibu_gt=74';
       break;
   }
 
+  page = 1;
   getBeers();
 });
 
@@ -37,25 +41,39 @@ filterABV.addEventListener('change', e => {
       optionsABV = '';
       break;
     case 'weak':
-      optionsABV = 'abv_lt=4.6';
+      optionsABV = '&abv_lt=4.6';
       break;
     case 'medium':
-      optionsABV = 'abv_gt=4.5&abv_lt=7.6';
+      optionsABV = '&abv_gt=4.5&abv_lt=7.6';
       break;
     case 'strong':
-      optionsABV = 'abv_gt=7.5';
+      optionsABV = '&abv_gt=7.5';
       break;
   }
 
+  page = 1;
   getBeers();
 });
 
 async function getBeers() {
   try {
-    const url = urlBase + '?' + optionsABV + '&' + optionsIBU;
+    const url = urlBase + page + optionsABV + optionsIBU;
     //Fetch the data from the API
     const res = await fetch(url);
     const data = await res.json();
+
+    pageText.innerText = page;
+    if (page === 1) {
+      prevPage.disabled = true;
+    } else {
+      prevPage.disabled = false;
+    }
+
+    if (data.length < 25) {
+      nextPage.disabled = true;
+    } else {
+      nextPage.disabled = false;
+    }
 
     //Create an empty variable that will hold the beer names
     let beerHtml = '';
@@ -90,5 +108,14 @@ async function getBeers() {
     console.log(err);
   }
 }
+
+prevPage.addEventListener('click', () => {
+  page--;
+  getBeers();
+});
+nextPage.addEventListener('click', () => {
+  page++;
+  getBeers();
+});
 
 getBeers();
