@@ -77,12 +77,16 @@ async function getBeers() {
 
     //Create an empty variable that will hold the beer names
     let beerHtml = '';
+    const genericBottle =
+      'https://cdn.pixabay.com/photo/2014/12/22/00/04/bottle-576717_960_720.png';
 
     data.forEach(beer => {
       beerHtml += `
       <div class="beer-wrapper card">
         <div class="beer">
-          <img class="beer-img" src="${beer.image_url}">
+          <img class="beer-img" src="${
+            beer.image_url ? beer.image_url : genericBottle
+          }">
           <h3>${beer.name}</h3>
           <span class="beer-info">
             <span>ABV: ${beer.abv}</span>
